@@ -50,6 +50,11 @@ PowerShell bootstrap code eats 324 bytes.
 
 Default browser is launched. This intro requires WebGPU only supported in Chromium browsers like Edge or Chrome. If default browser is Firefox, intro will not work.
 
+## Authors
+
+* Jerry "Bercon" Ylilammi
+* Veikko "pestis" Sariola
+
 ## License
 
 MIT Lice, see LICENSE
