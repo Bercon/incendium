@@ -1,0 +1,94 @@
+<html>
+    <body>
+        <style>
+            body {
+                background-color: black;
+                color: lightgray;
+                input {
+                    color: white;
+                }
+                datalist {
+                    position: fixed;
+                    left: 0;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    writing-mode: vertical-lr;
+                    width: 200px;
+                    color: white;
+                }
+                option {
+                    padding: 0;
+                }
+                input[type="range"] {
+                    position: fixed;
+                    left: 0;
+                }
+
+            }
+        </style>
+    </body>
+    Click
+    <canvas id=c></canvas>
+    <p style="position: fixed; cursor: none; top: 382; left: 400; font-weight: bold; font-family: sans-serif; font-size: 100; color: #fff; letter-spacing:50" id=B>
+        INCENDIUM
+    </p>
+    <script>
+        globalThis.time = 0;
+    </script>
+    <script>CODE_MAIN</script>
+
+    <input id="progressBar"  list="markers" type="range" min="0" max="180" step="0.01"/>
+
+    <datalist id="markers"></datalist>
+
+    <script>
+        let isSeeking = false; // Flag to prevent overriding seek
+
+        function updateTime(newTime) {
+
+        }
+        var dpr = window.devicePixelRatio;
+        var progress = document.getElementById("progressBar")
+        var markers = document.getElementById("markers")
+
+        progress.style.top = 1080 / dpr;
+        progress.style.width = 1920 / dpr;
+
+        markers.style.top = (1080 + 50) / dpr;
+        markers.style.width = 1920 / dpr;
+
+        for (var i = 0; i <= 180; i += 10) {
+            var option = document.createElement("option");
+            option.value = i;
+            option.label = "" + i;
+            markers.appendChild(option)
+        }
+
+        progress.addEventListener("mousedown", () => isSeeking = true);
+        progress.addEventListener("pointerdown", () => isSeeking = true);
+        progress.addEventListener("input", () => {
+            const newTime = progress.value;
+            if (!globalThis.audioContext || !globalThis.audioBuffer) return;
+            if (globalThis.bufferSource) {
+                globalThis.bufferSource.stop(); // Stop previous playback
+            }
+            var A = globalThis.audioContext;
+            var s = A.createBufferSource();
+            s.buffer = globalThis.audioBuffer;
+            s.connect(A.destination);
+            s.start(0, newTime); // Start from the given timestamp
+            globalThis.bufferSource = s;
+            globalThis.updateVisualTimers = newTime;
+        });
+        progress.addEventListener("mouseup", () => isSeeking = false);
+        progress.addEventListener("pointerup", () => isSeeking = false);
+
+        function updateSlider() {
+            if (!isSeeking) progressBar.value = globalThis.time;
+            requestAnimationFrame(updateSlider);
+        }
+        updateSlider();
+
+    </script>
+</html>
