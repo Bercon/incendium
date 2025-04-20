@@ -57,4 +57,4 @@ Default browser is launched. This intro requires WebGPU only supported in Chromi
 
 ## License
 
-MIT Lice, see LICENSE
+MIT license, see LICENSE
