@@ -46,9 +46,7 @@ There is still room for improvement with the packager, it doesn't try variable r
 
 The entry is compressed HTML page with brotli. Since brotli compressed content can only be served via web server, not locally opening the file we need a web server. This is achieved with Windows PowerShell script that serves the file itself with suitable offset once as via Windows builtin HTTP server. Technique introduce first (I think?) by Muhmac / Speckdrumm in Felid:  https://demozoo.org/graphics/342293/
 
-PowerShell bootstrap code eats 324 bytes.
-
-Default browser is launched. This intro requires WebGPU only supported in Chromium browsers like Edge or Chrome. If default browser is Firefox, intro will not work.
+One downside is that it opens the intro in the default browser. This intro requires WebGPU only supported in Chromium browsers like Edge or Chrome which means if default browser is Firefox, the intro will not work.
 
 ## Authors
 
