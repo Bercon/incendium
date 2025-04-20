@@ -4,7 +4,11 @@ INCENDIUM is a demoscene 4kb intro, meaning all code that generates the visuals 
 
 The entry is packaged as Windows PowerShell script which plays the compressed intro in web browser. The visuals and music are both generated using WebGPU.
 
-You can checkout a recording at https://youtu.be/U8FXJpO9Vck
+If you have a powerful GPU, you can run the intro in your browser. Best viewed with 16:9 aspect ratio. Your browser must suppord WebGPU (Chrome, Edge, etc.): https://bercon.github.io/incendium/
+
+You can also checkout a recording at https://youtu.be/U8FXJpO9Vck
+
+The intro is based on heavily optimized and stripped down version of [Roquefort](https://github.com/Bercon/roquefort), an in browser fluid simlator tech demo that runs even on less powerful hardware, especially if you drop the grid size smaller. Developing the Roquefort first allowed much easier debuging of the fluid simulation code. You can play around with the simulation here: https://bercon.github.io/roquefort/
 
 ## Highlights
 
