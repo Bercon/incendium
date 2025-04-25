@@ -2,7 +2,9 @@
 fn n(@builtin(global_invocation_id) global_id : vec3u) {
     // #reorder
     var b = vec2f(0); // #and
-    var k = to_index(P_GRID_RES_X, global_id); // #endreorder
+    var k = to_index(P_GRID_RES_X, global_id); // #and
+    // Z is the note data for music templated with Javascript
+    var q = array(Z); // #endreorder
     var t = f32(k) / P_SAMPLE_RATE;
     for (var a = 1.; a > .01; a /= 2) {
         for (var j = 0; j < 2; j++) {
@@ -16,8 +18,7 @@ fn n(@builtin(global_invocation_id) global_id : vec3u) {
             }
             var v = fract(r) + .0001;
             for (var i = i32(r) - P_MELODY_START; v < 9 && i >= 0; i--) {
-                // Z is the note data for music templated with Javascript
-                var n = array(Z)[i];
+                var n = q[i];
                 if (n > 0 && i < P_MELODY_NOTES_LENGTH) {
                     b.x += atan(t / 20) * sin(
                         sin(t * exp2(f32(n) / 12 + 9.6)) * cosh(sin(r + f32(j))) * cosh(t / 90) + m
@@ -29,8 +30,8 @@ fn n(@builtin(global_invocation_id) global_id : vec3u) {
             r /= 16;
             v = fract(r) + .0001;
             for (var i = i32(r); v < 9 && i >= 0; i--) {
-                // Z has all data combined, so start with offset
-                var n = array(Z)[i + P_MELODY_NOTES_LENGTH];
+                // Music has all data combined, so start with offset
+                var n = q[i + P_MELODY_NOTES_LENGTH];
                 if (n > 0 && i < P_BASS_NOTES_LENGTH) {
                     b.x += atan(t / 20) * sin(
                         sin(t * exp2(f32(n) / 12 + 7.6)) * (3 - v) * 2 + m
