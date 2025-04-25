@@ -12,13 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install dependencies
+      # - name: Install dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install -r requirements.txt
+      # - name: Run build
+      #   run: |
+      #     python scripts/build.py --no_optimization
+      - name: Copy uncompressed
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt      
-      - name: Run build
-        run: |
-          python scripts/build.py --no_optimization
+          mkdir -p build
+          cp HBC-00024_INCENDIUM/index.html build/
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
